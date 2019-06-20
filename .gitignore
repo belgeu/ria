@@ -1,0 +1,8 @@
+*.pkl
+*.csv
+*.txt
+.idea/
+*.pyc
+ria.log
+venv/
+*.ini
