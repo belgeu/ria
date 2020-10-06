@@ -21,6 +21,7 @@ class Search(object):
         self.start_time = time.time()
         self.end_time = None
         self.run_time = None
+        self.quiet = False
 
     def __getitem__(self, item):
         return getattr(self, item)
@@ -86,11 +87,13 @@ class Search(object):
     def sort_elements(d):
         return sorted(d)
 
-    @staticmethod
-    def continue_search(message=''):
+    def continue_search(self, message=''):
         positive = ('y', 'Y', 'Yes', 'YES')
         negative = ('n', 'N', 'No', 'NO')
         answer_options = positive + negative
+
+        if self.quiet:
+            return True
 
         while True:
             decision = input(message)

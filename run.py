@@ -66,6 +66,7 @@ def main():
                         help='Has damage: "yes", "no", "all". Default is "no".')
     parser.add_argument('-o', '--output', type=str, dest='output', metavar='OUTPUT', choices=['txt', 'csv'],
                         help='Search output. Default is "csv".')
+    parser.add_argument('-qm', '--quiet-mode', dest='quiet', help="Quiet mode", action="store_true")
     parser.add_argument("-v", "--verbose", help="Increase output verbosity.", action="store_true")
 
     opts = parser.parse_args()
@@ -78,6 +79,9 @@ def main():
         logger.setLevel(logging.DEBUG)
     else:
         logger.setLevel(logging.INFO)
+
+    if opts.quiet:
+        search.quiet = True
 
     # Set 'requests' lib WARN level logger
     logging.getLogger("requests").setLevel(logging.WARN)

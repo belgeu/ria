@@ -47,6 +47,10 @@ class Config:
         try:
             with open(f, 'rb') as key:
                 return pickle.load(key)
+        except pickle.UnpicklingError:
+            RiaLogger.log("Corrupted ria key %s, removing, please re-init" % f)
+            os.remove(f)
+            exit()
         except IOError:
             ria_key_init = input('MORE INFO ABOUT GETTING A KEY IS HERE https://developers.ria.com\n'
                                  'PASTE KEY HERE: ')
